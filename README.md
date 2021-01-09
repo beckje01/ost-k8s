@@ -1,9 +1,8 @@
-# DashMachine K8S Base Manifest
+# Open Speed Test K8S Base Manifest
 
 
-These are the base manifests to deploy [DashMachine](https://github.com/rmountjoy92/DashMachine) to k8s. 
+These are the base manifests to deploy [Open Speed Test](http://openspeedtest.com/) to k8s. 
 
-It uses a persistent volume claim for the config / uploads so they persist deploy to deployment.
 
 ## Notes
 
@@ -19,13 +18,13 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
 
-namespace: dashmachine
+namespace: ost
 
 commonLabels:
-  app: dashmachine
+  app: ost
 
 resources:
-  - github.com/beckje01/dashmachine-k8s/manifests?ref=v0.1
+  - github.com/beckje01/ost-k8s/manifests?ref=v0.2
   - ingress.yaml
 ```
 
@@ -34,17 +33,17 @@ ingress.yaml
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: dashmachine-ui
+  name: ost-ui
   annotations:
     kubernetes.io/ingress.class: traefik
 spec:
   rules:
-  - host: dash.lab.example
+  - host: ost.lab.example
     http:
       paths:
       - backend:
-          serviceName: dashmachine
-          servicePort: 5000
+          serviceName: ost
+          servicePort: 8080
 ```
 
 Build:
